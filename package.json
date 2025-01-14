@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gluestack-ui/alert-dialog": "^0.1.32",
+    "@gluestack-ui/fab": "^0.1.22",
     "@gluestack-ui/icon": "^0.1.25",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.16",
