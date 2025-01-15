@@ -6,7 +6,7 @@ import {ChevronLeftIcon, MenuIcon} from "@/components/ui/icon";
 export default function Header() {
 
     return (
-        <Box className="bg-success-300 h-24 flex-col-reverse">
+        <Box className="bg-primary-400 h-24 flex-col-reverse">
             <HStack className="w-full justify-between">
                 {/* BACK */}
                 <Center className="p-5">
