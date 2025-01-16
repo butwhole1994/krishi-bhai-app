@@ -31,3 +31,4 @@ export * from './textarea';
 export * from './tooltip';
 export * from './toast';
 export * from './vstack';
+export * from './table';

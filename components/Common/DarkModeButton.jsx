@@ -11,11 +11,7 @@ export default function DarkModeButton(props) {
     };
 
     return (
-        <Fab
-            size="lg"
-            placement="bottom right"
-            className="absolute bottom-12 right-12"
-        >
+        <Fab size="lg" placement="bottom right">
             <FabIcon onTouchEnd={darkModeHandler} as={MoonIcon} size="xl"/>
         </Fab>
     );

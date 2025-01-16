@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from "react-native";
 
-export default function MyCropScreen() {
+export default function MyPageScreen() {
     return (
         <View>MyCropScreen</View>
     );
