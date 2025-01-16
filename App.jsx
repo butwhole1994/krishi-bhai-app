@@ -1,13 +1,26 @@
 import "@/global.css";
 import {GluestackUIProvider} from "@/components/ui/gluestack-ui-provider";
-import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/native";
+import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import MainNavigator from './navigation';
+import {Provider, useSelector} from "react-redux";
+import store from "./redux/store";
+import {selectDarkMode} from "@/redux/selectors/darkModeSelectors";
 
 export default function App() {
     return (
-        <GluestackUIProvider mode="light">
-            <NavigationContainer theme={DefaultTheme}>
-                <MainNavigator />
+        <Provider store={store}>
+            <AppContent/>
+        </Provider>
+    );
+}
+
+export function AppContent() {
+    const isDarkMode = useSelector(selectDarkMode);
+
+    return (
+        <GluestackUIProvider mode={isDarkMode ? 'dark' : 'light'}>
+            <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
+                <MainNavigator/>
             </NavigationContainer>
         </GluestackUIProvider>
     );

@@ -10,9 +10,6 @@ import DarkModeButton from "@/components/Common/DarkModeButton";
 
 const Stack = createStackNavigator();
 
-{/* 앱 최상위 라우터 */
-}
-
 export default function MainNavigator() {
     return (
         <>
