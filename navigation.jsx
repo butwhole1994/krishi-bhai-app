@@ -10,12 +10,14 @@ import Hamburger from "@/components/Header/Hamburger";
 const Stack = createStackNavigator();
 
 {/* 앱 최상위 라우터 */}
+
 export default function MainNavigator() {
     return (
-        <Stack.Navigator id="MainStack"   screenOptions={{
-            headerRight: () => <Hamburger />,
+        <Stack.Navigator id="MainStack" screenOptions={{
+            headerTitleAlign: "center",
+            headerRight: () => <Hamburger/>
         }}>
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} options={{headerTitle: 'Test'}}/>
             <Stack.Screen name="Fertilizer" component={FertilizerScreen}/>
             <Stack.Screen name="Pesticide" component={PesticideScreen}/>
             <Stack.Screen name="MyCrop" component={MyCropScreen}/>
