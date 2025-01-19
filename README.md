@@ -1,7 +1,7 @@
 # krishi-bhai
 
 # 실행방법
-terminal -> npm start -> QR 생성
+terminal -> npm install -> npm start (번들링 완료 시 QR 생성됨)
 휴대폰에서 expo go 앱 다운로드 -> expo go 앱으로 QR 스냅 -> 앱 실행
 
 # Architecture
