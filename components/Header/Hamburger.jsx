@@ -18,7 +18,7 @@ import {
 import {MenuIcon} from "@/components/ui/icon";
 import {BugIcon, HouseIcon, SproutIcon} from "lucide-react-native";
 import {useNavigation} from "@react-navigation/native";
-
+/*test*/
 export default function Hamburger() {
     const [showDrawer, setShowDrawer] = React.useState(false)
     const navigation = useNavigation(); // navigation 객체 가져오기
