@@ -9,7 +9,6 @@ export default function DockBar() {
 
     /* 스크린 이동 버튼 */
     const moveScreen = (screenName) => {
-        console.log('press');
         navigation.navigate(screenName);
     }
 
@@ -29,10 +28,10 @@ export default function DockBar() {
                     <Heading size="sm">Pesticide</Heading>
                 </Pressable>
                 <Pressable className={classNames.ButtonStyle}
-                     onPress={() => moveScreen('MyPage')}
+                     onPress={() => moveScreen('MyFarm')}
                 >
                     <Icon as={HouseIcon} size="xl"/>
-                    <Heading size="sm">My Page</Heading>
+                    <Heading size="sm">My Farm</Heading>
                 </Pressable>
                 <Pressable className={classNames.ButtonStyle}
                      onPress={() => moveScreen('Tips')}
