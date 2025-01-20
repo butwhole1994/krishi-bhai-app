@@ -5,8 +5,8 @@ import FertilizerScreen from "@/screens/fertilizer/FertilizerScreen";
 import PesticideScreen from "@/screens/pesticide/PesticideScreen";
 import MyPageScreen from "@/screens/myCrop/MyPageScreen";
 import TipsScreen from "@/screens/tips/TipsScreen";
-import Hamburger from "@/components/Header/Hamburger";
 import DarkModeButton from "@/components/Common/DarkModeButton";
+import DockBar from "@/components/Footer/DockBar";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ export default function MainNavigator() {
         <>
             <Stack.Navigator id="MainStack" screenOptions={{
                 headerTitleAlign: "center",
-                headerRight: () => <Hamburger/>,
+                headerRight: () => <DarkModeButton/>,
             }}>
                 <Stack.Screen name="Home" component={HomeScreen} options={{headerTitle: 'Krishi Bhai'}}/>
                 <Stack.Screen name="Fertilizer" component={FertilizerScreen}/>
@@ -23,7 +23,7 @@ export default function MainNavigator() {
                 <Stack.Screen name="MyPage" component={MyPageScreen}/>
                 <Stack.Screen name="Tips" component={TipsScreen}/>
             </Stack.Navigator>
-            <DarkModeButton />
+            <DockBar/>
         </>
     );
 }
