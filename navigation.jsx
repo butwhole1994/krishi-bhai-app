@@ -20,7 +20,7 @@ export default function MainNavigator() {
                 <Stack.Screen name="Home" component={HomeScreen} options={{headerTitle: 'Krishi Bhai'}}/>
                 <Stack.Screen name="Fertilizer" component={FertilizerScreen}/>
                 <Stack.Screen name="Pesticide" component={PesticideScreen}/>
-                <Stack.Screen name="MyFarm" component={MyFarmScreen}/>
+                <Stack.Screen name="My Farm" component={MyFarmScreen}/>
                 <Stack.Screen name="Tips" component={TipsScreen}/>
             </Stack.Navigator>
             <DockBar/>

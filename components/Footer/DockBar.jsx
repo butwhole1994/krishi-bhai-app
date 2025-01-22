@@ -28,7 +28,7 @@ export default function DockBar() {
                     <Heading size="sm">Pesticide</Heading>
                 </Pressable>
                 <Pressable className={classNames.ButtonStyle}
-                     onPress={() => moveScreen('MyFarm')}
+                     onPress={() => moveScreen('My Farm')}
                 >
                     <Icon as={HouseIcon} size="xl"/>
                     <Heading size="sm">My Farm</Heading>
