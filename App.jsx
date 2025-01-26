@@ -10,7 +10,6 @@ import { initializeDatabase } from "@/database/Database";
 export default function App() {
 
 
-
     return (
         <Provider store={store}>
             <AppContent/>

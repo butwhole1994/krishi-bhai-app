@@ -9,7 +9,7 @@ import {
  */
 export const initializeDatabase = async () => {
     try {
-        const db = await openDatabaseAsync('app.db', { createFromLocation: 1 });
+        const db = await openDatabaseAsync('DB_KRISHI_BHAI', { createFromLocation: 1 });
         console.log('Database initialized successfully');
         return db;
     } catch (error) {
