@@ -33,7 +33,7 @@ export function AppContent() {
         const initApp = async () => {
             //1. DB 초기화
             await initializeDatabase();
-            //2. 앱 최초실행 확인
+            //2. 앱 최초실행 확인 -> 온보딩 노출 분기
             const resultSet = await selectAppInfo();
             if (resultSet[0].IS_FIRST_LAUNCH !== 0) setIsFirstLaunch(true);
         };
