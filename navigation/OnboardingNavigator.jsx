@@ -12,9 +12,10 @@ export default function OnboardingNavigator() {
         <>
             <Stack.Navigator id="MainStack" screenOptions={{
                 headerTitleAlign: "center",
+                headerTitle: 'Welcome!',
                 headerRight: () => <DarkModeButton/>,
             }}>
-                <Stack.Screen name="1st" component={FirstScreen}/>
+                <Stack.Screen name="1st" component={FirstScreen} />
                 <Stack.Screen name="2nd" component={SecondScreen}/>
                 <Stack.Screen name="3rd" component={ThirdScreen}/>
             </Stack.Navigator>
