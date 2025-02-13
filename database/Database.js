@@ -91,4 +91,24 @@ export const initializeDatabase = async () => {
     });
 };
 
+/*
+* SQL 실행을 위해 파라미터 KEY 앞에 $를 붙여주는 함수
+* */
+export const convertToSQLiteParams = (data) => {
+    return Object.fromEntries(
+        Object.entries(data).map(([key, value]) => {
+            // SQLite에서 허용하는 타입만 반환
+            if (typeof value === "string" || typeof value === "number" || typeof value === "boolean" || value instanceof Uint8Array || value === null) {
+                return [`$${key}`, value];
+            }
+            // 허용되지 않는 값은 문자열로 변환 (또는 예외 처리)
+            console.warn(`Warning: Invalid SQLite parameter type for key "${key}". Converting to string.`);
+            return [`$${key}`, String(value)];
+        })
+    );
+};
+
+
+
+
 export default SQLiteDatabase;

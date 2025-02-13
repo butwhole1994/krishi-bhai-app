@@ -12,12 +12,11 @@ export default function OnboardingNavigator() {
         <>
             <Stack.Navigator id="MainStack" screenOptions={{
                 headerTitleAlign: "center",
-                headerTitle: 'Welcome!',
                 headerRight: () => <DarkModeButton/>,
             }}>
-                <Stack.Screen name="1st" component={FirstScreen} />
-                <Stack.Screen name="2nd" component={SecondScreen}/>
-                <Stack.Screen name="3rd" component={ThirdScreen}/>
+                <Stack.Screen name="1st" component={FirstScreen} options={{headerTitle: 'My Farm'}}/>
+                <Stack.Screen name="2nd" component={SecondScreen} options={{headerTitle: 'My Crop'}}/>
+                <Stack.Screen name="3rd" component={ThirdScreen} options={{headerTitle: 'My Fertilizer'}}/>
             </Stack.Navigator>
         </>
     );
