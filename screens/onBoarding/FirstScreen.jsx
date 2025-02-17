@@ -33,16 +33,18 @@ import {
 } from "@/components/ui";
 import {Controller, useForm} from "react-hook-form"; // 폼 상태 관리와 컨트롤러를 위한 훅 임포트
 import {useNavigation} from "@react-navigation/native"; // 네비게이션 훅 임포트
+import {insertMyFarm} from "/database/repositories/MyFarmRepository";
 
 export default function FirstScreen() {
     const navigation = useNavigation(); // 네비게이션 객체 생성
 
     // useForm 훅을 통해 폼 상태 관리 객체(control 등)를 생성
-    const {control, handleSubmit, formState: {errors}} = useForm();
+    const {control, handleSubmit, reset, formState: {errors}} = useForm();
 
     // 폼 제출 시 호출될 콜백 함수
     const onSubmit = (data) => {
-        console.log("Form Data:", data); // 폼 데이터 콘솔 출력
+        reset();
+        insertMyFarm(data);
         navigation.navigate('2nd');   // 제출 후 '2nd' 화면으로 네비게이트
     };
 
@@ -69,7 +71,7 @@ export default function FirstScreen() {
                 {/* FARM NAME INPUT - Controller를 사용하여 폼 필드와 UI를 연결 */}
                 <Controller
                     control={control} // useForm에서 생성된 control 객체 전달
-                    name="farmName"   // 이 필드의 이름 지정 (최종 폼 데이터의 key)
+                    name="my_farm_name"   // 이 필드의 이름 지정 (최종 폼 데이터의 key)
                     rules={{required: "Farm name must be set"}} // 유효성 검사 규칙: 필수 입력
                     render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
                         // FormControl 컴포넌트로 입력 필드 및 에러 메시지 감싸기
@@ -100,7 +102,7 @@ export default function FirstScreen() {
                     {/* FARM AREA INPUT */}
                     <Controller
                         control={control}
-                        name="farmArea"
+                        name="my_farm_area"
                         render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
                             <FormControl style={{flex: 2}} isInvalid={!!error}>
                                 <FormControlLabel>
@@ -128,7 +130,7 @@ export default function FirstScreen() {
                     {/* FARM AREA UNIT INPUT */}
                     <Controller
                         control={control}
-                        name="farmAreaUnit"
+                        name="my_farm_area_unit"
                         render={({field: {onChange, value}}) => (
                             <FormControl style={{flex: 1}}>
                                 <FormControlLabel>
@@ -138,6 +140,7 @@ export default function FirstScreen() {
                                 <Select
                                     onValueChange={onChange} // 선택 값 변경 시 onChange 호출
                                     selectedValue={value}    // 현재 선택된 값 반영
+                                    defaultValue="m²"
                                 >
                                     <SelectTrigger size="xl" className="flex-row justify-between items-center">
                                         <SelectInput placeholder="Unit"/>

@@ -13,68 +13,68 @@ export const initializeDatabase = async () => {
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS TS_APP_INFO
         (
-            IS_FIRST_LAUNCH INTEGER,
-            LANGUAGE VARCHAR,
-            IS_DARK_MODE INTEGER,
-            IS_USE_PUSH INTEGER,
-            CURRENT_VERSION VARCHAR
+            is_first_launch INTEGER,
+            language VARCHAR,
+            is_dark_mode INTEGER,
+            is_use_push INTEGER,
+            current_version VARCHAR
         );
         CREATE TABLE IF NOT EXISTS TS_CODE_GROUP
         (
-            CODE_GROUP_ID INTEGER PRIMARY KEY NOT NULL,
-            CODE_GROUP_NAME VARCHAR NOT NULL,
-            CODE_GROUP_DESC VARCHAR,
-            CREATE_DT TIMESTAMP NOT NULL,
-            UPDATE_DT TIMESTAMP NOT NULL
+            code_group_id INTEGER PRIMARY KEY NOT NULL,
+            code_group_name VARCHAR NOT NULL,
+            code_group_desc VARCHAR,
+            create_dt TIMESTAMP NOT NULL,
+            update_dt TIMESTAMP NOT NULL
         );
         CREATE TABLE IF NOT EXISTS TS_CODE
         (
-            CODE_ID INTEGER PRIMARY KEY NOT NULL,
-            CODE_GROUP_ID INTEGER NOT NULL,
-            CODE_NAME VARCHAR NOT NULL,
-            CODE_DESC VARCHAR,
-            CREATE_DT TIMESTAMP NOT NULL,
-            UPDATE_DT TIMESTAMP NOT NULL,
-            FOREIGN KEY (CODE_GROUP_ID) REFERENCES TS_CODE_GROUP(CODE_GROUP_ID)
+            code_id INTEGER PRIMARY KEY NOT NULL,
+            code_group_id INTEGER NOT NULL,
+            code_name VARCHAR NOT NULL,
+            code_desc VARCHAR,
+            create_dt TIMESTAMP NOT NULL,
+            update_dt TIMESTAMP NOT NULL,
+            FOREIGN KEY (code_group_id) REFERENCES TS_CODE_GROUP(code_group_id)
         );
         CREATE TABLE IF NOT EXISTS TB_MY_CROP
         (
-            MY_CROP_ID INTEGER PRIMARY KEY NOT NULL,
-            MY_CROP_NAME VARCHAR NOT NULL,
-            MY_CROP_CODE VARCHAR NOT NULL,
-            MY_CROP_STAT_CODE VARCHAR,
-            MY_CROP_SEASON_CODE VARCHAR,
-            MY_CROP_N INTEGER,
-            MY_CROP_P INTEGER,
-            MY_CROP_K INTEGER,
-            CREATE_DT TIMESTAMP NOT NULL,
-            UPDATE_DT TIMESTAMP NOT NULL
+            my_crop_id INTEGER PRIMARY KEY NOT NULL,
+            my_crop_name VARCHAR NOT NULL,
+            my_crop_code VARCHAR NOT NULL,
+            my_crop_stat_code VARCHAR,
+            my_crop_season_code VARCHAR,
+            my_crop_n INTEGER,
+            my_crop_p INTEGER,
+            my_crop_k INTEGER,
+            create_dt TIMESTAMP NOT NULL,
+            update_dt TIMESTAMP NOT NULL
         );
         CREATE TABLE IF NOT EXISTS TB_MY_FARM
         (
-            MY_FARM_ID INTEGER PRIMARY KEY NOT NULL,
-            MY_FARM_NAME VARCHAR NOT NULL,
-            MY_FARM_AREA INTEGER NOT NULL,
-            MY_FARM_AREA_UNIT VARCHAR,
-            CREATE_DT TIMESTAMP NOT NULL,
-            UPDATE_DT TIMESTAMP NOT NULL
+            my_farm_id INTEGER PRIMARY KEY NOT NULL,
+            my_farm_name VARCHAR NOT NULL,
+            my_farm_area INTEGER NOT NULL,
+            my_farm_area_unit VARCHAR,
+            create_dt TIMESTAMP NOT NULL,
+            update_dt TIMESTAMP NOT NULL
         );
         CREATE TABLE IF NOT EXISTS TB_MY_FERTILIZER
         (
-            MY_FERTILIZER_ID INTEGER PRIMARY KEY NOT NULL,
-            MY_FERTILIZER_NAME VARCHAR NOT NULL,
-            MY_FERTILIZER_N INTEGER,
-            MY_FERTILIZER_P INTEGER,
-            MY_FERTILIZER_K INTEGER,
-            CREATE_DT TIMESTAMP NOT NULL,
-            UPDATE_DT TIMESTAMP NOT NULL
+            my_fertilizer_id INTEGER PRIMARY KEY NOT NULL,
+            my_fertilizer_name VARCHAR NOT NULL,
+            my_fertilizer_n INTEGER,
+            my_fertilizer_p INTEGER,
+            my_fertilizer_k INTEGER,
+            create_dt TIMESTAMP NOT NULL,
+            update_dt TIMESTAMP NOT NULL
         );
         INSERT INTO TS_APP_INFO
         (
-            LANGUAGE,
-            IS_DARK_MODE,
-            IS_USE_PUSH,
-            CURRENT_VERSION
+            language,
+            is_dark_mode,
+            is_use_push,
+            current_version
         )
         SELECT
             '${language}',
