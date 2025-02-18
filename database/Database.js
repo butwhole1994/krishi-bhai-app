@@ -82,6 +82,28 @@ export const initializeDatabase = async () => {
             '${is_use_push}',
             '${current_version}'
         WHERE NOT EXISTS (SELECT * FROM TS_APP_INFO);
+        
+        WITH new_data AS (
+            SELECT 1 AS code_group_id, 
+                   'crop_stat_code_group' AS code_group_name,
+                   'crop growth status code group' AS code_group_desc,
+                   datetime('now', '+5 hours', '30 minutes') AS create_dt,
+                   datetime('now', '+5 hours', '30 minutes') AS update_dt
+            UNION ALL
+            SELECT 2, 'season_code_group', 'season weighted value code group', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 3, 'area_unit_code_group', 'area unit code group', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+        )
+        INSERT INTO TS_CODE_GROUP (
+            code_group_id,
+            code_group_name,
+            code_group_desc,
+            create_dt,
+            update_dt
+        )
+        SELECT * FROM new_data
+        WHERE NOT EXISTS (SELECT 1 FROM TS_CODE_GROUP);
+
     `)
     .then(result => {
         console.log('Database initializing success:', result);

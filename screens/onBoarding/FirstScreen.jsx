@@ -16,6 +16,7 @@ import {
     FormControlLabelText,
     Heading,
     HStack,
+    Image,
     Input,
     InputField,
     Select,
@@ -38,10 +39,10 @@ import {insertMyFarm} from "/database/repositories/MyFarmRepository";
 export default function FirstScreen() {
     const navigation = useNavigation(); // 네비게이션 객체 생성
 
-    // useForm 훅을 통해 폼 상태 관리 객체(control 등)를 생성
+    /* useForm 폼 상태 관리 객체 생성 */
     const {control, handleSubmit, reset, formState: {errors}} = useForm();
 
-    // 폼 제출 시 호출될 콜백 함수
+    /* 폼 submit 콜백 함수 */
     const onSubmit = (data) => {
         reset();
         insertMyFarm(data);
@@ -66,13 +67,23 @@ export default function FirstScreen() {
                 <Heading size="3xl">Let me know your farm!</Heading>
             </Center>
 
+            {/* FARM IMAGE */}
+            <Center>
+                <Image
+                    className="rounded-lg"
+                    size="2xl"
+                    source={require("@/resources/images/onBoarding/farm_image.jpg")}
+                    alt="farm_image"
+                />
+            </Center>
+
             {/* ===== FORM START ===== */}
             <VStack className="p-4 border-outline-300" space="xl">
-                {/* FARM NAME INPUT - Controller를 사용하여 폼 필드와 UI를 연결 */}
+                {/* MY FARM NAME INPUT - Controller를 사용하여 폼 필드와 UI를 연결 */}
                 <Controller
                     control={control} // useForm에서 생성된 control 객체 전달
                     name="my_farm_name"   // 이 필드의 이름 지정 (최종 폼 데이터의 key)
-                    rules={{required: "Farm name must be set"}} // 유효성 검사 규칙: 필수 입력
+                    rules={{required: "Farm Name must be set"}} // 유효성 검사 규칙
                     render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
                         // FormControl 컴포넌트로 입력 필드 및 에러 메시지 감싸기
                         <FormControl isInvalid={!!error}>
@@ -99,7 +110,7 @@ export default function FirstScreen() {
                 />
 
                 <HStack space="md" className="w-full">
-                    {/* FARM AREA INPUT */}
+                    {/* MY FARM AREA INPUT */}
                     <Controller
                         control={control}
                         name="my_farm_area"
@@ -127,7 +138,7 @@ export default function FirstScreen() {
                         )}
                     />
 
-                    {/* FARM AREA UNIT INPUT */}
+                    {/* MY FARM AREA UNIT INPUT */}
                     <Controller
                         control={control}
                         name="my_farm_area_unit"

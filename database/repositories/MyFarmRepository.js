@@ -7,7 +7,7 @@ export const insertMyFarm = async (data) => {
         console.log(SQLiteBindParams);
         const result = await SQLiteDatabase.runAsync(`
             INSERT INTO TB_MY_FARM (my_farm_name, my_farm_area, my_farm_area_unit, create_dt, update_dt)
-            VALUES ($my_farm_name, $my_farm_area, $my_farm_area_unit, datetime('now'), datetime('now'))
+            VALUES ($my_farm_name, $my_farm_area, $my_farm_area_unit, datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes'))
             `, SQLiteBindParams
         );
         console.log("Database initialized successfully:", result);
