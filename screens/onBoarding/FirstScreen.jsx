@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     AlertCircleIcon,
     Box,
@@ -38,7 +38,7 @@ import {insertMyFarm} from "/database/repositories/MyFarmRepository";
 
 export default function FirstScreen() {
     const navigation = useNavigation(); // 네비게이션 객체 생성
-
+    const [isLoading, setIsLoading] = useState(true);
     /* useForm 폼 상태 관리 객체 생성 */
     const {control, handleSubmit, reset, formState: {errors}} = useForm();
 

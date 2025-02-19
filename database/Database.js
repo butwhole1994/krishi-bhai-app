@@ -32,6 +32,7 @@ export const initializeDatabase = async () => {
             code_id INTEGER PRIMARY KEY NOT NULL,
             code_group_id INTEGER NOT NULL,
             code_name VARCHAR NOT NULL,
+            code_value VARCHAR,
             code_desc VARCHAR,
             create_dt TIMESTAMP NOT NULL,
             update_dt TIMESTAMP NOT NULL,
@@ -83,7 +84,7 @@ export const initializeDatabase = async () => {
             '${current_version}'
         WHERE NOT EXISTS (SELECT * FROM TS_APP_INFO);
         
-        WITH new_data AS (
+        WITH init_code_group AS (
             SELECT 1 AS code_group_id, 
                    'crop_stat_code_group' AS code_group_name,
                    'crop growth status code group' AS code_group_desc,
@@ -101,8 +102,77 @@ export const initializeDatabase = async () => {
             create_dt,
             update_dt
         )
-        SELECT * FROM new_data
+        SELECT * FROM init_code_group
         WHERE NOT EXISTS (SELECT 1 FROM TS_CODE_GROUP);
+        
+        WITH init_crop_stat_code AS (
+            SELECT 1 AS code_id,
+                   1 AS code_group_id,
+                   'Preparation' AS code_name,
+                   'crop status - Preparation' AS code_desc,
+                   datetime('now', '+5 hours', '30 minutes') AS create_dt,
+                   datetime('now', '+5 hours', '30 minutes') AS update_dt
+            UNION ALL
+            SELECT 2, 1, 'Growing', 'crop status - Growing', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 3, 1, 'Flowering', 'crop status - Flowering', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+        )
+        INSERT INTO TS_CODE (
+            code_id,
+            code_group_id,
+            code_name,
+            code_desc,
+            create_dt,
+            update_dt
+        )
+        SELECT * FROM init_crop_stat_code
+        WHERE NOT EXISTS (SELECT * FROM TS_CODE WHERE code_group_id = 1);
+        
+        WITH init_season_code AS (
+            SELECT 4 AS code_id,
+                   2 AS code_group_id,
+                   'Kharif' AS code_name,
+                   'season - Kharif (Monsoon)' AS code_desc,
+                   datetime('now', '+5 hours', '30 minutes') AS create_dt,
+                   datetime('now', '+5 hours', '30 minutes') AS update_dt
+            UNION ALL
+            SELECT 5, 2, 'Rabi', 'season - Rabi (Dry)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 6, 2, 'Zaid ', 'season - Zaid (Summer)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+        )
+        INSERT INTO TS_CODE (
+            code_id,
+            code_group_id,
+            code_name,
+            code_desc,
+            create_dt,
+            update_dt
+        )
+        SELECT * FROM init_season_code
+        WHERE NOT EXISTS (SELECT * FROM TS_CODE WHERE code_group_id = 2);
+        
+        WITH init_area_unit_code AS (
+            SELECT 7 AS code_id,
+                   3 AS code_group_id,
+                   'Kharif' AS code_name,
+                   'season - Kharif (Monsoon)' AS code_desc,
+                   datetime('now', '+5 hours', '30 minutes') AS create_dt,
+                   datetime('now', '+5 hours', '30 minutes') AS update_dt
+            UNION ALL
+            SELECT 8, 3, 'Rabi', 'season - Rabi (Dry)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 9, 3, 'Zaid ', 'season - Zaid (Summer)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+        )
+        INSERT INTO TS_CODE (
+            code_id,
+            code_group_id,
+            code_name,
+            code_desc,
+            create_dt,
+            update_dt
+        )
+        SELECT * FROM init_area_unit_code
+        WHERE NOT EXISTS (SELECT * FROM TS_CODE WHERE code_group_id = 3);
 
     `)
     .then(result => {

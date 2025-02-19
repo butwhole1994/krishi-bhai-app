@@ -7,7 +7,7 @@ import store from "./redux/store";
 import {selectDarkMode} from "@/redux/selectors/darkModeSelectors";
 import {initializeDatabase} from "@/database/Database";
 import React, {useEffect, useState} from "react";
-import {selectAppInfo} from "@/database/repositories/AppInfoRepository";
+import {selectAppInfo} from "@/database/repositories/CommonRepository";
 import OnboardingNavigator from "@/navigation/OnboardingNavigator";
 import LoadingScreen from "@/screens/common/LoadingScreen";
 
