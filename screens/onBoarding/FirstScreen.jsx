@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from "react";
 import {
     AlertCircleIcon,
     Box,
@@ -35,6 +35,8 @@ import {
 import {Controller, useForm} from "react-hook-form"; // 폼 상태 관리와 컨트롤러를 위한 훅 임포트
 import {useNavigation} from "@react-navigation/native"; // 네비게이션 훅 임포트
 import {insertMyFarm} from "/database/repositories/MyFarmRepository";
+import {selectCodeByCodeGroupId} from "@/database/repositories/CommonRepository";
+import LoadingScreen from "@/screens/common/LoadingScreen";
 
 export default function FirstScreen() {
     const navigation = useNavigation(); // 네비게이션 객체 생성
@@ -48,6 +50,25 @@ export default function FirstScreen() {
         insertMyFarm(data);
         navigation.navigate('2nd');   // 제출 후 '2nd' 화면으로 네비게이트
     };
+
+    useEffect(() => {
+        const selectAreaUnitCode = async () => {
+            try {
+                //1. AREA UNIT CODE 조회
+                const areaUintCodeList = await selectCodeByCodeGroupId(3);
+                console.log(areaUintCodeList);
+            } catch (error) {
+                console.error("selectCodeByCodeGroupId ERROR:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        selectAreaUnitCode();
+    }, []);
+
+    if (isLoading) {
+        return <LoadingScreen/>
+    }
 
     return (
         <Box>

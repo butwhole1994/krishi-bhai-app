@@ -2,7 +2,6 @@ import SQLiteDatabase, {convertToSQLiteParams} from "@/database/Database";
 
 export const insertMyFarm = async (data) => {
     try {
-
         const SQLiteBindParams = convertToSQLiteParams(data);
         console.log(SQLiteBindParams);
         const result = await SQLiteDatabase.runAsync(`

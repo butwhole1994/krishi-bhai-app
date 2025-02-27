@@ -14,7 +14,8 @@ export const selectAppInfo  = async () => {
 export const selectCodeByCodeGroupId  = async (code_group_id) => {
     try {
         const allRows = await SQLiteDatabase.getAllAsync(
-            'SELECT * FROM TS_CODE_INFO WHERE code_group_id = $code_group_id;', {$code_group_id: code_group_id}
+            'SELECT * FROM TS_CODE_INFO WHERE code_group_id = $code_group_id;'
+            , {$code_group_id: code_group_id}
         );
         console.log("selectAppInfo success");
         return allRows;
