@@ -3,6 +3,8 @@ import Constants from 'expo-constants';
 
 const SQLiteDatabase = SQLite.openDatabaseSync('krishi_bhai.db');
 
+/* 앱 초기설정 값 */
+const is_first_launch = '1';
 const language = 'en';
 const is_dark_mode = '0';
 const is_use_push = '0';
@@ -72,12 +74,14 @@ export const initializeDatabase = async () => {
         );
         INSERT INTO TS_APP_INFO
         (
+            is_first_launch,
             language,
             is_dark_mode,
             is_use_push,
             current_version
         )
         SELECT
+            '${is_first_launch}',
             '${language}',
             '${is_dark_mode}',
             '${is_use_push}',
