@@ -5,8 +5,8 @@ import FertilizerScreen from "@/screens/fertilizer/FertilizerScreen";
 import PesticideScreen from "@/screens/pesticide/PesticideScreen";
 import MyFarmScreen from "@/screens/myFarm/MyFarmScreen";
 import TipsScreen from "@/screens/tips/TipsScreen";
-import DarkModeButton from "@/components/Common/DarkModeButton";
-import DockBar from "@/components/Footer/DockBar";
+import DarkModeButton from "@/components/common/DarkModeButton";
+import DockBar from "@/components/footer/DockBar";
 
 const Stack = createStackNavigator();
 

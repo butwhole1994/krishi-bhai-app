@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import DarkModeButton from "@/components/Common/DarkModeButton";
+import DarkModeButton from "@/components/common/DarkModeButton";
 import FirstScreen from "@/screens/onBoarding/FirstScreen";
 import SecondScreen from "@/screens/onBoarding/SecondScreen";
 import ThirdScreen from "@/screens/onBoarding/ThirdScreen";
