@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useState} from "react";
 import {
     AlertCircleIcon,
     Box,
@@ -33,10 +33,11 @@ import {
     VStack
 } from "@/components/ui";
 import {Controller, useForm} from "react-hook-form"; // 폼 상태 관리와 컨트롤러를 위한 훅 임포트
-import {useNavigation} from "@react-navigation/native"; // 네비게이션 훅 임포트
+import {useFocusEffect, useNavigation} from "@react-navigation/native"; // 네비게이션 훅 임포트
 import {insertMyFarm} from "/database/repositories/MyFarmRepository";
 import {selectCodeByCodeGroupId} from "@/database/repositories/CommonRepository";
 import LoadingScreen from "@/screens/common/LoadingScreen";
+import FormError from "@/components/form/FormError";
 
 export default function FirstScreen() {
     const navigation = useNavigation(); // 네비게이션 객체 생성
@@ -51,7 +52,7 @@ export default function FirstScreen() {
         navigation.navigate('2nd');   // 제출 후 '2nd' 화면으로 네비게이트
     };
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         const selectAreaUnitCode = async () => {
             try {
                 //1. AREA UNIT CODE 조회
@@ -64,7 +65,8 @@ export default function FirstScreen() {
             }
         };
         selectAreaUnitCode();
-    }, []);
+    }, []));
+
 
     if (isLoading) {
         return <LoadingScreen/>
@@ -99,7 +101,7 @@ export default function FirstScreen() {
             </Center>
 
             {/* ===== FORM START ===== */}
-            <VStack className="p-4 border-outline-300" space="xl">
+            <VStack className="p-4" space="xl">
                 {/* MY FARM NAME INPUT - Controller를 사용하여 폼 필드와 UI를 연결 */}
                 <Controller
                     control={control} // useForm에서 생성된 control 객체 전달
@@ -120,82 +122,75 @@ export default function FirstScreen() {
                                     value={value}            // 현재 입력값 반영
                                 />
                             </Input>
-                            {error && (
-                                <FormControlError>
-                                    <FormControlErrorIcon as={AlertCircleIcon}/>
-                                    <FormControlErrorText>{error.message}</FormControlErrorText>
-                                </FormControlError>
-                            )}
+                            <FormError message={error?.message}/>
                         </FormControl>
                     )}
                 />
 
-                <HStack space="md" className="w-full">
+                <HStack space="md">
                     {/* MY FARM AREA INPUT */}
-                    <Controller
-                        control={control}
-                        name="my_farm_area"
-                        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
-                            <FormControl style={{flex: 2}} isInvalid={!!error}>
-                                <FormControlLabel>
-                                    <FormControlLabelText>Farm Area</FormControlLabelText>
-                                </FormControlLabel>
-                                <Input size="xl">
-                                    <InputField
-                                        type="text"
-                                        keyboardType="number-pad" // 숫자 입력 전용 키패드
-                                        onChangeText={onChange}    // 값 변경 시 폼 상태 업데이트
-                                        onBlur={onBlur}
-                                        value={value}
-                                    />
-                                </Input>
-                                {error && (
-                                    <FormControlError>
-                                        <FormControlErrorIcon as={AlertCircleIcon}/>
-                                        <FormControlErrorText>{error.message}</FormControlErrorText>
-                                    </FormControlError>
-                                )}
-                            </FormControl>
-                        )}
-                    />
-
+                    <Box style={{flex: 2}}>
+                        <Controller
+                            control={control}
+                            name="my_farm_area"
+                            render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+                                <FormControl isInvalid={!!error}>
+                                    <FormControlLabel>
+                                        <FormControlLabelText>Farm Area</FormControlLabelText>
+                                    </FormControlLabel>
+                                    <Input size="xl">
+                                        <InputField
+                                            type="text"
+                                            keyboardType="number-pad" // 숫자 입력 전용 키패드
+                                            onChangeText={onChange}    // 값 변경 시 폼 상태 업데이트
+                                            onBlur={onBlur}
+                                            value={value}
+                                        />
+                                    </Input>
+                                    <FormError message={error?.message}/>
+                                </FormControl>
+                            )}
+                        />
+                    </Box>
                     {/* MY FARM AREA UNIT INPUT */}
-                    <Controller
-                        control={control}
-                        name="my_farm_area_unit"
-                        render={({field: {onChange, value}}) => (
-                            <FormControl style={{flex: 1}}>
-                                <FormControlLabel>
-                                    <FormControlLabelText></FormControlLabelText>
-                                </FormControlLabel>
-                                {/* Select 컴포넌트를 사용하여 드롭다운 메뉴 구현 */}
-                                <Select
-                                    onValueChange={onChange} // 선택 값 변경 시 onChange 호출
-                                    selectedValue={value}    // 현재 선택된 값 반영
-                                    defaultValue="m²"
-                                >
-                                    <SelectTrigger size="xl" className="flex-row justify-between items-center">
-                                        <SelectInput placeholder="Unit"/>
-                                        <SelectIcon as={ChevronDownIcon} className="mr-3"/>
-                                    </SelectTrigger>
-                                    <SelectPortal>
-                                        <SelectBackdrop/>
-                                        <SelectContent>
-                                            <SelectDragIndicatorWrapper>
-                                                <SelectDragIndicator/>
-                                            </SelectDragIndicatorWrapper>
-                                            {/* 선택 항목들 */}
-                                            <SelectItem label="m²" value="m²"/>
-                                            <SelectItem label="Ground" value="Ground"/>
-                                            <SelectItem label="Bigha" value="Bigha"/>
-                                            <SelectItem label="Acre" value="Acre"/>
-                                            <SelectItem label="Hectare" value="Hectare"/>
-                                        </SelectContent>
-                                    </SelectPortal>
-                                </Select>
-                            </FormControl>
-                        )}
-                    />
+                    <Box style={{flex: 1}}>
+                        <Controller
+                            control={control}
+                            name="my_farm_area_unit"
+                            render={({field: {onChange, value}}) => (
+                                <FormControl>
+                                    <FormControlLabel>
+                                        <FormControlLabelText></FormControlLabelText>
+                                    </FormControlLabel>
+                                    {/* Select 컴포넌트를 사용하여 드롭다운 메뉴 구현 */}
+                                    <Select
+                                        onValueChange={onChange} // 선택 값 변경 시 onChange 호출
+                                        selectedValue={value}    // 현재 선택된 값 반영
+                                        defaultValue="m²"
+                                    >
+                                        <SelectTrigger size="xl" className="flex-row justify-between items-center">
+                                            <SelectInput placeholder="Unit"/>
+                                            <SelectIcon as={ChevronDownIcon} className="mr-3"/>
+                                        </SelectTrigger>
+                                        <SelectPortal>
+                                            <SelectBackdrop/>
+                                            <SelectContent>
+                                                <SelectDragIndicatorWrapper>
+                                                    <SelectDragIndicator/>
+                                                </SelectDragIndicatorWrapper>
+                                                {/* 선택 항목들 */}
+                                                <SelectItem label="m²" value="m²"/>
+                                                <SelectItem label="Ground" value="Ground"/>
+                                                <SelectItem label="Bigha" value="Bigha"/>
+                                                <SelectItem label="Acre" value="Acre"/>
+                                                <SelectItem label="Hectare" value="Hectare"/>
+                                            </SelectContent>
+                                        </SelectPortal>
+                                    </Select>
+                                </FormControl>
+                            )}
+                        />
+                    </Box>
                 </HStack>
 
                 {/* NEXT BUTTON - handleSubmit를 사용하여 폼 검증 후 onSubmit 호출 */}

@@ -142,7 +142,7 @@ export const initializeDatabase = async () => {
             UNION ALL
             SELECT 5, 2, 'Rabi', 'season - Rabi (Dry)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
             UNION ALL
-            SELECT 6, 2, 'Zaid ', 'season - Zaid (Summer)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            SELECT 6, 2, 'Zaid', 'season - Zaid (Summer)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
         )
         INSERT INTO TS_CODE (
             code_id,
@@ -158,14 +158,18 @@ export const initializeDatabase = async () => {
         WITH init_area_unit_code AS (
             SELECT 7 AS code_id,
                    3 AS code_group_id,
-                   'Kharif' AS code_name,
-                   'season - Kharif (Monsoon)' AS code_desc,
+                   'm²' AS code_name,
+                   'area unit - m²' AS code_desc,
                    datetime('now', '+5 hours', '30 minutes') AS create_dt,
                    datetime('now', '+5 hours', '30 minutes') AS update_dt
             UNION ALL
-            SELECT 8, 3, 'Rabi', 'season - Rabi (Dry)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            SELECT 8, 3, 'Ground', 'area unit - Ground', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
             UNION ALL
-            SELECT 9, 3, 'Zaid ', 'season - Zaid (Summer)', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            SELECT 9, 3, 'Bigha', 'area unit - Bigha', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 10, 3, 'Acre', 'area unit - Acre', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
+            UNION ALL
+            SELECT 11, 3, 'Hectare', 'area unit - Hectare', datetime('now', '+5 hours', '30 minutes'), datetime('now', '+5 hours', '30 minutes')
         )
         INSERT INTO TS_CODE (
             code_id,
